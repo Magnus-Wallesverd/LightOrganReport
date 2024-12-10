@@ -1,0 +1,146 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[english]{babel}
+\usepackage{indentfirst}
+
+\begin{document}
+\large{
+    \begin{titlepage}
+    \centering
+    \vspace*{\fill}
+
+    \vspace*{0.5cm}
+
+    \huge\bfseries
+    Light Organ Project
+
+    \vspace*{0.5cm}
+
+    \large Jiawei Zhang \& Paige Wallesverd \\
+    ENEE4096 Independent Study \\
+    Prof.Kim D Jovanovich
+
+    \vspace*{\fill}
+    \end{titlepage}
+    \section*{Introduction}
+    In 2020 two students designed and worked on the second version of the light organ. 
+    A light organ which has 5 acrylic tubes with 5 multi-color LED's underneath which are sent signals from 5 individual filters. The ultimate goal is to play music and other frequencies that turn on the corresponding lights, however, the students were not able to complete the project due to COVID-19. We investigate their design for areas of improvment. However, their description of the circuit is vague, So we come up with our own design.
+    In the summer of 2024, we decided our objective would be to complete the project with an improved design of the filter circuit anticipating enrollment in ENEE 4096.
+
+
+    
+    
+    \section*{Equipment}
+        \begin{itemize}
+            \item 12V Wall adapter
+            \item Wood frame
+            \item 5 acrylic tubes
+            \item Tricolor LEDs
+            \item Varying Resistors
+            \item Varying Capacitors
+            \item LM324N
+            \item 2x IC mount
+            \item BJT 2N2222
+            \item 1N4732 Zener Diode
+            \item 1N4001 silicon Diode
+            \item LM7805 Voltage regulator
+            \item Tektronix TDS 2022C
+            \item Hewlett Packard E3630A Triple output DC power supply
+            \item Agilent 33120A Waveform Generator
+            \item Agilent 34401A Digital Multimeter
+            \item Tektronix PWS2323 DC power supply
+            \item Breadboards
+            \item Wire
+            \item Wire adapter
+            \item Moog subsequent 37 synthesizer
+            \item Fender Amplifier
+            \item Creality 3D printer
+            \item 3D printed mount
+            \item circuitjs1
+            \item Matlab
+        \end{itemize}
+    \section*{Theory}
+    An audio frequency is periodic vibration that can be heard by the average person. The standard hearing range for humans is 20 to 20,000 Hz.
+
+    This circuit design is intended to visualize the human hearing range by splitting the range into 5 different frequency bands, low, mid, and high, represented by 5 colored LED's
+
+    \subsection*{\fontsize{10}{11}\selectfont Power}
+    % Double check information
+     A power supply is essential for providing the necessary current and voltage for the circuit to operate. In most small circuits such as this one a 12V DC adapter is used. The minimum operating voltage of Op Amp is +5V and -5V. Each led need at least 4V and 50mA.  The 7805 voltage regulator and 1N4732 Zener Diode are used to split 12V DC to +7V and  -5V.
+     
+    
+     
+    \subsection*{\fontsize{10}{11}\selectfont Amplification}
+    Audio amplifiers are electronic devices designed to increase the amplitude of audio signals, such as music or speech, making them suitable for driving loudspeakers or other audio output devices.The amplifier must have a flat frequency response over the audio spectrum (typically 20 Hz to 20 kHz) to accurately reproduce all audio frequencies without attenuation or distortion.
+    \subsection*{\fontsize{10}{11}\selectfont Electronic Filtering}
+. 
+        Each filter designed in this study is an active filter that uses an LM324N Low-Power Quad-Operation Amplifier.
+        
+        Low pass filter
+
+        The design for the low pass filter is a 2nd order RC filter with unity gain. 
+
+        The filter design for the 3 band pass filters are multiple feedback filters. A research paper was found detailing this filter.
+
+        The high pass filter is a 2 stage filter with a passive first stage and an active second stage.
+        
+    \subsection*{\fontsize{10}{11}\selectfont Transistor Switching}
+    Bipolar Junction Transistors (BJTs) are semiconductor devices that can amplify current. They have three layers and terminals: the emitter, base, and collector. BJTs can operate in three modes: active, saturation, and cutoff. When used in switching applications, the BJT operates mainly in saturation and cutoff regions. The filtered signal will control the base voltage or current of BJTs transistors. The BJT is in cuff off region when base current drop below certain level. No current flow through emitter collector in cut off region. The BJTs is in saturation mode, if sufficient base current is supplied. Significant amount of current flow through collector and emitter driving the Leds. 
+    \subsection*{\fontsize{10}{11}\selectfont LED's}
+     LED is a special type of diode and has high forward voltage drop. LED will only turn on when voltage is greater or equal to the nominal voltage rating. 
+
+    
+
+    \section*{Procedure}
+
+   The first step was the filter design process. Initially second order passive filters were designed, however these filters were not sufficient for the design due to low output voltages. The next design that was considered were active filters with buffers which did ndt give desired output voltage. The Sallen Key topology was considered for the band pass filter however, due to the filter characteristic the multiple feedback filter was chosen instead. In order to get the desired frequency ranges for each filter our general strategy was to set either the resistors equal or the capacitors equal,  then set the damping ratio equal to roughly 0.707, a standard 3 dB cutoff, and solve for the unknown components. Most if not all analytic component values were unobtainable so rounding was used. The desired components were selected and then tested on a bread board. If the filter did not give the desired effect, the components were reselected and retested.
+  
+ The second step was to migrate the circuit from the bread board to a protoboard. The main challenge here was  minimizing the total circuit area to fit a 70x90 mm board. In this step we decided to switch to the LM324 quad op-amp
+  
+ The circuit was soldered using standard rosin core solder, stripped jumper wire to mimic traces, and header pins to connect to an audio source and the LEDs. Once everything was soldered, it was tested and retained the prior results observerd on the breadboard.
+  
+ The next step was to ensure the circuit would be protected from physical damage. We had help from fellow IEEE members Allen Lucatero and Peter Dimarco with 3-D printing a case for the circuit board.
+  
+The last step was adding a circuit that allows this device to be powered via wall outlets. The power for this circuit is supplied by a 12V - 3.5A wall adapter that was scavenged from a recycle bin. By Professor Jovanovich's recommendation a LM7805 was used to regulate the circuit.
+ 
+After completing all the steps prior it was decided to conclude with any further development on this particular design.
+
+The method for getting the response of these filters was to create a digital impulse function in Matlab
+
+    \section*{Results}
+
+    \subsection*{Low Pass Filter}
+    
+    \subsection*{Band Pass Filter}
+    
+    \subsection*{High Pass Filter}
+    
+    \subsection*{Transistor}
+        
+    \section*{Conclusion}
+
+
+    \newpage
+    \section*{Appendix}
+
+    The transfer function for low pass filter
+        \begin{equation}
+            H(s)=\frac{1}{s^2 R_1 R_2 C_1 C_2+s\left(R_1 C_1+R_1 C_2+R_2 C_2\right)+1}            
+        \end{equation}
+    
+    \vspace{2em}     
+    Transfer function for multiple feedback filter
+
+        \begin{equation}
+            H(s)=\frac{-s \frac{1}{R_1 C_4}}{s^2+s \frac{(C_3C_4)}{C_3 C_4 R_5}+\frac{1}{R_5 C_3 C_4}\left(\frac{1}{R_1}+\frac{1}{R_2}\right)}
+        \end{equation}
+    \vspace{2em}     
+    
+    Transfer function for high pass filter
+    \begin{equation}
+        \frac{s^2R_3+s\frac{(R_3}{C_1*R_1}}{s^2R_2+sR_2\frac{R_1+\frac{C_1R_1}{C2}+R_2}{C_1*R_1*R_2} + \frac{R2}{(C_1C_2R_1R_2)}}
+    \end{equation}
+
+\end{document} 
